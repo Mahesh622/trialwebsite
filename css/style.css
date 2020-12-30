@@ -1,0 +1,27 @@
+form {
+  padding: 2%;
+}
+
+#labelrow {
+  padding: 2%;
+}
+#labelrowelem {
+  background-color: burlywood;
+  text-align: center;
+}
+hr {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  border: 0;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.addproductbutton {
+  border-color: #2196f3;
+  color: dodgerblue;
+}
+
+.addproductbutton:hover {
+  background: #2196f3;
+  color: white;
+}
