@@ -13,10 +13,7 @@
         <div class="form-row">
           <div class="form-group col-md-6">
             <label for="companyName">Company Name</label>
-            <input type="text" class="form-control is-invalid" id="companyName" placeholder="Company Name" required>
-            <div class="valid-feedback">
-              Please provide a valid company name.
-            </div>
+            <input type="text" class="form-control" id="companyName" placeholder="Company Name" required>
           </div>
           <div class="form-group col-md-3">
             <label for="invoiceNo">Invoice no</label>
@@ -94,30 +91,30 @@
             <div class="row">
               <div class="col mb-6" id="product-name-modal-entry"> 
                 <label for="product-name-modal">Product Name</label>
-                <input type="text" class="form-control" id="product-name-modal" onblur="ifEmpty(id)" onkeypress="ifEmptyOnEnter(id)" placeholder="Product Name">
+                <input type="text" class="form-control" id="product-name-modal" onblur="ifEmpty(id)" onkeypress="ifEmptyOnEnter(id)" placeholder="Product Name" autocomplete="off">
               </div>
               <div class="col mb-6" id="product-hsn-modal-entry">
                 <label for="product-hsn-modal">HSN</label>
-                <input type="text" class="form-control" id="product-hsn-modal" onblur="ifEmpty(id)" placeholder="HSN">
+                <input type="text" class="form-control" id="product-hsn-modal" onblur="ifEmpty(id)" onkeypress="ifEmptyOnEnter(id)" placeholder="HSN" autocomplete="off">
               </div>
             </div>
             <div class="row">
             <div class="col mb-3" id="product-quantity-modal-entry">
               <label for="product-quantity-modal">Quantity</label>
-              <input type="number" class="form-control" id="product-quantity-modal" onblur="ifEmpty(id)" placeholder="Quantity">
+              <input type="number" class="form-control" id="product-quantity-modal" onblur="ifEmpty(id); calculateEachAmount()" onkeypress="ifEmptyOnEnter(id)" onchange="calculateEachAmount()" placeholder="Quantity">
             </div>
             <div class="col mb-3"> 
               <label for="product-unit-modal">Unit</label>
-              <select class="form-control" id="product-unit-modal">
+              <select class="form-control" id="product-unit-modal" onkeypress="ifEmptyOnEnter(id)">
               </select>
             </div>
             <div class="col mb-3" id="product-rate-modal-entry">
               <label for="product-rate-modal">Rate</label>
-              <input type="number" class="form-control" id="product-rate-modal" onblur="ifEmpty(id)" placeholder="Rate">
+              <input type="number" class="form-control" id="product-rate-modal" onblur="ifEmpty(id); calculateEachAmount()" onkeypress="ifEmptyOnEnter(id)" oninput="calculateEachAmount()" placeholder="Rate">
             </div>
             <div class="col mb-3" id="product-disount-modal-entry">
               <label for="product-disount-modal">Discount</label>
-              <input type="number" class="form-control" id="product-disount-modal" onblur="ifEmpty(id)" placeholder="Discount">
+              <input type="number" class="form-control" id="product-discount-modal" onblur="ifEmpty(id); calculateEachAmount()" onkeypress="ifEmptyOnEnter(id)" onchange="calculateEachAmount()" placeholder="Discount">
             </div>
             </div>
             <div class="row">
@@ -127,7 +124,7 @@
               </div>
               <div class="col" id="">
                 <label for="product-gstpercent-modal">GST %</label>
-                <select class="form-control" id="product-gstpercent-modal">
+                <select class="form-control" id="product-gstpercent-modal" onchange="calculateEachAmount()">
                   <option>0%</option>
                   <option>5%</option>
                   <option>12%</option>
@@ -149,40 +146,35 @@
           </form>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-outline-danger" data-dismiss="modal">
+          <a type="button" class="btn btn-outline-danger" data-dismiss="modal" onclick="addEntryToTable()">
             Close
-          </button>
-          <button type="submit" class="btn btn-outline-dark" form="editTable">Done</button>
+          </a>
+          <button type="button" class="btn btn-outline-dark" form="editTable">Done</button>
         </div>
       </div>
     </div>
   </div>
 </div>
     <div class="row" style="padding: 2%;">
-      <table class="table table-bordered table-hover">
+      <table id="entry-table" class="table table-bordered table-hover">
         <thead class="thead-dark">
           <tr>
             <th scope="col" style="width: 5%;">Sr No</th>
             <th scope="col" style="width: 20%;">Product Name</th>
-            <th scope="col" style="width: 15%">HSN</th>
+            <!-- <th scope="col" style="width: 15%">HSN</th> -->
             <th scope="col" style="width: 10%;">Quantity</th>
-            <th scope="col" style="width: 5%;">Unit</th>
+            <!-- <th scope="col" style="width: 5%;">Unit</th> -->
             <th scope="col" style="width: 10%;">Rate</th>
-            <th scope="col" style="width: 5%;">Disc</th>
-            <th scope="col" style="width: 10%;">Gross Amount</th>
+            <!-- <th scope="col" style="width: 5%;">Disc</th> -->
+            <!-- <th scope="col" style="width: 10%;">Gross Amount</th> -->
             <th scope="col" style="width: 5%;">GST %</th>
-            <th scope="col" style="width: 10%;">GST amount</th>
+            <!-- <th scope="col" style="width: 10%;">GST amount</th> -->
             <th scope="col" style="width: 10%;">Amount</th>
           </tr>
         </thead>
         <tbody id="product-table-body">
           
         </tbody>  
-        <tbody>
-          <tr>
-          
-          </tr>
-        </tbody>
     </div>
   </div>
     

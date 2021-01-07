@@ -34,16 +34,98 @@ function ifEmpty(elementId) {
 }
 
 function ifEmptyOnEnter(elementId) {
-  // $.get(elementId).
-  console.log(event.code)
-//   var idList = ["product-name-model", "product-hsn-model",
-//     "product-quantity-model", "product-unit-model", "product-rate-model",
-//     "product-discount-model", "product-gstpercent-model"];
-//   function findSameId(id) {
-//     return id = elementId.toString();
-//   }
-//   console.log(idList.find(findSameId));
-  // document.getElementById(elementId.toString()).parentElement.nextElementSibling.getElementsByTagName('input')[0].focus();
-
+  if (event.code == "Enter"){
+    var parentNode = document.getElementById(elementId).parentNode.nextElementSibling;
+    if (parentNode != null) {
+      parentNode.children[1].focus();
+    }
+    else {
+      document.getElementById(elementId).parentNode.parentNode.nextElementSibling.children[0].children[1].focus();
+    }
+  }
 }
 
+// function calculateGrossAmount() {
+//   var productQuantity = document.getElementById('product-quantity-modal').value;
+//   var productRate = document.getElementById('product-rate-modal').value;
+//   var prouctDiscount = document.getElementById('product-discount-modal').value == null ? 0 : document.getElementById('product-discount-modal').value;
+//   var grossAmount = document.getElementById('product-gstpercent-modal')
+//   if (productQuantity != '' && productRate != '') {
+//     grossAmount = (productQuantity * productRate) - (productQuantity * productRate) * (prouctDiscount/100);
+//     document.getElementById('product-gross-amount-modal').disabled = false;
+//     document.getElementById('product-gross-amount-modal').value = grossAmount;
+//     document.getElementById('product-gross-amount-modal').disabled = true;
+//   }
+// }
+
+function calculateEachAmount() {
+  var productQuantity = document.getElementById('product-quantity-modal').value;
+  var productRate = document.getElementById('product-rate-modal').value;
+  var prouctDiscount = document.getElementById('product-discount-modal').value == null ? 0 : document.getElementById('product-discount-modal').value;
+  if (productQuantity != '' && productRate != '') {
+    var grossAmount = (productQuantity * productRate) - (productQuantity * productRate) * (prouctDiscount/100);
+    document.getElementById('product-gross-amount-modal').disabled = false;
+    document.getElementById('product-gross-amount-modal').value = grossAmount;
+    document.getElementById('product-gross-amount-modal').disabled = true;
+  }
+  // var grossAmount = document.getElementById('product-gross-amount-modal').value
+  var productGstPercernt = document.getElementById('product-gstpercent-modal').value;
+  if (grossAmount != '') {
+    var gstAmount = grossAmount * (productGstPercernt.slice(0, -1) / 100);
+    var totalAmount = parseInt(grossAmount) + parseInt(gstAmount);
+    document.getElementById('product-gstamount-modal').disabled = false;
+    document.getElementById('product-gstamount-modal').value = gstAmount;
+    document.getElementById('product-gstamount-modal').disabled = true;
+    document.getElementById('product-amount-modal').disabled = false;
+    document.getElementById('product-amount-modal').value = totalAmount;
+    document.getElementById('product-amount-modal').disabled = true;
+  }
+}
+
+function addEntryToTable() {
+  var productSrNo = document.getElementById('entry-table').getElementsByTagName("tbody").length;
+  var productName = document.getElementById('product-name-modal').value;
+  var productHsn = document.getElementById('product-hsn-modal').value;
+  var productQuantity = document.getElementById('product-quantity-modal').value;
+  var productUnit = document.getElementById('product-unit-modal').value;
+  var productRate = document.getElementById('product-rate-modal').value;
+  var productDiscount = document.getElementById('product-discount-modal').value;
+  var productGrossAmount = document.getElementById('product-gross-amount-modal').value;
+  var productGstPercernt = document.getElementById('product-gstpercent-modal').value;
+  var productGstAmount = document.getElementById('product-gstamount-modal').value;
+  var productAmount = document.getElementById('product-amount-modal').value;
+  var request = $.ajax({
+    method: "POST",
+  })
+  request.done(function () {
+    html = document.getElementById('product-table-body').innerHTML;
+    html += ` <tr>
+                <td>`+ productSrNo + `</td>
+                <td>`+ productName + `</td>
+                <td>`+ productQuantity + `</td>
+                <td>`+ productRate + `</td>
+                <td>`+ productGstPercernt + `</td>
+                <td>`+ productAmount + `</td>
+            
+                
+              </tr>
+              
+               <a class="btn btn-primary" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right-short" viewBox="0 0 16 16">
+                  <path fill-rule="evenodd" d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"/>
+                  </svg></a>
+                  <div class="collapse" id="collapseExample">
+                    <div class="card card-body">
+                      Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
+                    </div>
+                  </div>
+                
+              `;
+    $('#product-table-body').html(html);
+  })
+}
+{/* <td>`+ productHsn + `</td>
+            <td>`+ productUnit + `</td>
+            <td>`+ productDiscount + `</td>
+            <td>`+ productGrossAmount + `</td>
+            <td>`+ productGstAmount + `</td> */}
