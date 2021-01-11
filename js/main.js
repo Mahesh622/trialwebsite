@@ -83,7 +83,7 @@ function calculateEachAmount() {
 }
 
 function addEntryToTable() {
-  var productSrNo = document.getElementById('entry-table').getElementsByTagName("tbody").length;
+  var productSrNo = (document.getElementById('product-table-body').getElementsByTagName("tr").length)/2;
   var productName = document.getElementById('product-name-modal').value;
   var productHsn = document.getElementById('product-hsn-modal').value;
   var productQuantity = document.getElementById('product-quantity-modal').value;
@@ -106,26 +106,48 @@ function addEntryToTable() {
                 <td>`+ productRate + `</td>
                 <td>`+ productGstPercernt + `</td>
                 <td>`+ productAmount + `</td>
-            
-                
               </tr>
               
-               <a class="btn btn-primary" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+              <tr>
+              <td colspan="6">
+               <a class="btn btn-primary" data-toggle="collapse; changeButtonOrientation" href="#collapseRow`+ productSrNo +`" role="button" aria-expanded="false" aria-controls="collapseExample" id="extraInfoButton" onpress="changeButtonOrientation(id)" >
                   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right-short" viewBox="0 0 16 16">
                   <path fill-rule="evenodd" d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"/>
                   </svg></a>
-                  <div class="collapse" id="collapseExample">
+                  <div class="collapse" id="collapseRow`+ productSrNo +`">
                     <div class="card card-body">
-                      Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
+                      <table class="table table-bordered table-hover">
+                        <thead>
+                          <tr>
+                            <th scope="col" style="width: 10%">HSN</th>
+                            <th scope="col" style="width: 5%;">Unit</th>
+                            <th scope="col" style="width: 5%;">Disc</th>
+                            <th scope="col" style="width: 10%;">Gross Amount</th>
+                            <th scope="col" style="width: 10%;">GST amount</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td>`+ productHsn + `</td>
+                            <td>`+ productUnit + `</td>
+                            <td>`+ productDiscount + `</td>
+                            <td>`+ productGrossAmount + `</td>
+                            <td>`+ productGstAmount + `</td>
+                          </tr>
+                        </tbody>
+                      </table>
                     </div>
                   </div>
-                
+              </td>
+              </tr>
+              
               `;
     $('#product-table-body').html(html);
   })
 }
-{/* <td>`+ productHsn + `</td>
-            <td>`+ productUnit + `</td>
-            <td>`+ productDiscount + `</td>
-            <td>`+ productGrossAmount + `</td>
-            <td>`+ productGstAmount + `</td> */}
+
+function changeButtonOrientation(elementId) {
+  console.log(document.getElementById(elementId).innerHTML);
+}
+
+// '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-down-short" viewBox="0 0 16 16"> <path fill-rule="evenodd" d="M8 4a.5.5 0 0 1 .5.5v5.793l2.146-2.147a.5.5 0 0 1 .708.708l-3 3a.5.5 0 0 1-.708 0l-3-3a.5.5 0 1 1 .708-.708L7.5 10.293V4.5A.5.5 0 0 1 8 4z" /> </svg>'
