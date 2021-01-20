@@ -146,10 +146,9 @@
           </form>
         </div>
         <div class="modal-footer">
-          <a type="button" class="btn btn-outline-danger" data-dismiss="modal" onclick="addEntryToTable()">
-            Close
-          </a>
-          <button type="button" class="btn btn-outline-dark" form="editTable">Done</button>
+          <a type="button" class="btn btn-outline-danger" data-dismiss="modal" >Close</a>
+          <a type="button" class="btn btn-outline-dark" form="editTable" data-dismiss="modal" onclick="addEntryToTable()">Done</a>
+          <a type="button" class="btn btn-outline-dark" form="editTable" data-dismiss="modal">Add to productlist</a>
         </div>
       </div>
     </div>
@@ -184,7 +183,7 @@
   <script src="assets/node_modules/@popperjs/core/dist/umd/popper.min.js"></script>
   <script src="assets/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
   <script src="assets/node_modules/bootstrap/dist/js/bootstrap.bundle.js"></script>
-  <script src="./js/main.js"></script>
+  <script src="./js/modal.js"></script>
 </body>
 </html>
 

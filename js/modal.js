@@ -45,19 +45,6 @@ function ifEmptyOnEnter(elementId) {
   }
 }
 
-// function calculateGrossAmount() {
-//   var productQuantity = document.getElementById('product-quantity-modal').value;
-//   var productRate = document.getElementById('product-rate-modal').value;
-//   var prouctDiscount = document.getElementById('product-discount-modal').value == null ? 0 : document.getElementById('product-discount-modal').value;
-//   var grossAmount = document.getElementById('product-gstpercent-modal')
-//   if (productQuantity != '' && productRate != '') {
-//     grossAmount = (productQuantity * productRate) - (productQuantity * productRate) * (prouctDiscount/100);
-//     document.getElementById('product-gross-amount-modal').disabled = false;
-//     document.getElementById('product-gross-amount-modal').value = grossAmount;
-//     document.getElementById('product-gross-amount-modal').disabled = true;
-//   }
-// }
-
 function calculateEachAmount() {
   var productQuantity = document.getElementById('product-quantity-modal').value;
   var productRate = document.getElementById('product-rate-modal').value;
@@ -68,7 +55,6 @@ function calculateEachAmount() {
     document.getElementById('product-gross-amount-modal').value = grossAmount;
     document.getElementById('product-gross-amount-modal').disabled = true;
   }
-  // var grossAmount = document.getElementById('product-gross-amount-modal').value
   var productGstPercernt = document.getElementById('product-gstpercent-modal').value;
   if (grossAmount != '') {
     var gstAmount = grossAmount * (productGstPercernt.slice(0, -1) / 100);
@@ -110,7 +96,7 @@ function addEntryToTable() {
               
               <tr>
               <td colspan="6">
-               <a class="btn btn-primary" data-toggle="collapse; changeButtonOrientation" href="#collapseRow`+ productSrNo +`" role="button" aria-expanded="false" aria-controls="collapseExample" id="extraInfoButton" onpress="changeButtonOrientation(id)" >
+               <a class="btn btn-primary" id="extraInfoButton" ontap="changeButtonOrientation(id)" data-toggle="collapse" href="#collapseRow`+ productSrNo +`" role="button" aria-expanded="false" aria-controls="collapseExample" >
                   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right-short" viewBox="0 0 16 16">
                   <path fill-rule="evenodd" d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"/>
                   </svg></a>
