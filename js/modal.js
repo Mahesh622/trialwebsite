@@ -6,8 +6,8 @@ function ifEmpty(elementId) {
           if (document.getElementById(elementId.toString()).parentNode.getElementsByTagName('small')[0]  == null) {
             var request = $.ajax({
               method: "POST",
-              // contentType: false, 
-              // processData: false, 
+              contentType: false, 
+              processData: false, 
             })
             request.done(function () {
               var html = document.getElementById(elementId.toString()).parentElement.innerHTML;
@@ -69,7 +69,7 @@ function calculateEachAmount() {
 }
 
 function addEntryToTable() {
-  var productSrNo = (document.getElementById('product-table-body').getElementsByTagName("tr").length)/2;
+  var productSrNo = (document.getElementById('product-table-body').getElementsByTagName("tr").length)/4+1;
   var productName = document.getElementById('product-name-modal').value;
   var productHsn = document.getElementById('product-hsn-modal').value;
   var productQuantity = document.getElementById('product-quantity-modal').value;
@@ -82,6 +82,8 @@ function addEntryToTable() {
   var productAmount = document.getElementById('product-amount-modal').value;
   var request = $.ajax({
     method: "POST",
+    contentType: false, 
+    processData: false, 
   })
   request.done(function () {
     html = document.getElementById('product-table-body').innerHTML;
