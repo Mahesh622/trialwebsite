@@ -8,6 +8,7 @@ function ifEmpty(elementId) {
               method: "POST",
               contentType: false, 
               processData: false, 
+              data:{},
             })
             request.done(function () {
               var html = document.getElementById(elementId.toString()).parentElement.innerHTML;
