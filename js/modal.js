@@ -5,6 +5,7 @@ function ifEmpty(elementId) {
           document.getElementById( elementId.toString()).style.color = 'red';
           if (document.getElementById(elementId.toString()).parentNode.getElementsByTagName('small')[0]  == null) {
             var request = $.ajax({
+              type: 'get',
               method: "POST",
               contentType: false, 
               processData: false, 
